@@ -110,14 +110,23 @@ According to Oseledec's theorem, the limit of
 ```math
   P = \lim_{M\to\infty} (O^{\dagger}_{M} O_{M})^{1/2M}
 ```
-would have the eigenvalues of $\ \{e^{(\nu_1)}, e^{(-\nu_1)}, \ldots, e^{(\nu_s)}, e^{(-\nu_s)}\}$, in which $\ \nu_i \geq \nu_{i+1} \geq 0$ with $\ i=1,2, \ldots, s$
+would have the eigenvalues of $\ \{e^{(\nu_1)}, e^{(-\nu_1)}, \ldots, e^{(\nu_s)}, e^{(-\nu_s)}\}$, in which $\ \nu_i \geq \nu_{i+1} \geq 0$ with $\ i=1,2, \ldots, s$ is the Lyapunov exponents (LE). Defining $\ P$ this way let us to see that an eigenvector $\ \eta_i$ of $\ P$ with eigenvalue $\ e^{-\nu_i}$ satisfies
+```math
+\vert \vert O_M \eta_i \vert \vert^2 = \eta_i^\dagger (O_M^\dagger O_M) \eta_i = \eta_i^\dagger [(O_M^\dagger O_M)^{1/2M}]^{2M} \eta_i \approx \eta_i^\dagger P^{2M} \eta_i = \vert \vert e^{-M\nu_i} \eta_i \vert \vert^2    
+```
+By this, for sufficiently large $\ M$, the smallest LEs would indicate how fast the energy-eigenstate would decay, which in essence would be equivalent to the localization length where it is defined as $\ \rho_{q1D} = 1/\nu_s$
+
+Furthermore, to calculate the Lyapunov exponents numerically directly contains a very high round-off error. To negate this effect, we use QR decomposition multiples times at every $\ q$ steps of multiplication as the following shows.  
+
 ```math
     O_M = UR
 ```
 ```math
     \nu_i = \lim_{M\to\infty} \frac{\ln{(R)_{i,i}}}{M}
 ```
-
+```math
+  \nu_i = \lim_{M/q \to \infty} \sum_{j=1}^{M/q} \frac{\ln{R_j}_{i,i}}{M}
+```
 
 
 
